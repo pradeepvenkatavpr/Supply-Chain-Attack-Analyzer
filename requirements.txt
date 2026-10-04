@@ -1,0 +1,4 @@
+PyYAML>=6.0.2,<7.0
+packaging>=24.2,<27.0
+requests>=2.32.3,<3.0
+cyclonedx-python-lib>=9.0.0,<12.0

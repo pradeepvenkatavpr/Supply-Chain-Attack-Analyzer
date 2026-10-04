@@ -1,0 +1,52 @@
+policy_version: "1.0"
+default_action: flag
+
+dependency_policy:
+  require_lockfiles: true
+  reject_unpinned_direct_dependencies: true
+  reject_vcs_dependencies_without_commit: true
+  allow_prerelease_versions: false
+  allow_local_path_dependencies: false
+  maximum_dependency_depth: 50
+
+vulnerability_policy:
+  critical_action: block
+  high_action: review
+  medium_action: flag
+  low_action: record
+  unknown_severity_action: review
+  maximum_accepted_cvss: 7.0
+  require_advisory_source: true
+
+provenance_policy:
+  require_source_repository: true
+  require_release_tag_or_commit: true
+  require_verified_artifact_provenance: false
+  reject_untrusted_download_sources: true
+
+integrity_policy:
+  require_hashes_for_release_artifacts: true
+  accepted_hash_algorithms:
+    - sha256
+    - sha384
+    - sha512
+  reject_hash_mismatch: true
+
+license_policy:
+  require_license_metadata: true
+  review_unknown_licenses: true
+  denied_licenses: []
+  review_licenses:
+    - GPL-3.0-only
+    - AGPL-3.0-only
+
+secrets_policy:
+  scan_manifests_for_credentials: true
+  redact_detected_secret_values: true
+  fail_on_committed_private_keys: true
+
+exception_policy:
+  require_owner: true
+  require_justification: true
+  require_expiry_date: true
+  maximum_exception_days: 90

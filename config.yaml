@@ -1,0 +1,42 @@
+application:
+  name: supply-chain-attack-analyzer
+  version: "1.0.0"
+  environment: development
+  log_level: INFO
+
+analysis:
+  fail_on_invalid_input: true
+  include_transitive_dependencies: true
+  maximum_dependency_depth: 50
+  maximum_findings: 1000
+  continue_on_package_error: true
+
+inputs:
+  manifest_paths:
+    - pyproject.toml
+    - requirements.txt
+    - package-lock.json
+    - pom.xml
+  sbom_paths: []
+  lockfile_required_for_release: true
+
+outputs:
+  directory: reports
+  formats:
+    - json
+    - markdown
+  include_summary: true
+  redact_credentials: true
+
+network:
+  enabled: false
+  request_timeout_seconds: 10
+  maximum_retries: 2
+  verify_tls: true
+
+security:
+  fail_on_critical_findings: true
+  fail_on_high_findings: false
+  allow_unpinned_dependencies: false
+  require_dependency_hashes: false
+  block_known_malicious_packages: true

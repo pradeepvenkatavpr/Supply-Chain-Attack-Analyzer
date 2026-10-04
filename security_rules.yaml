@@ -1,0 +1,81 @@
+rules_version: "1.0"
+rules:
+  - id: SC-001
+    name: Critical vulnerability
+    category: vulnerability
+    enabled: true
+    severity: critical
+    condition: vulnerability_severity_is_critical
+    action: block
+
+  - id: SC-002
+    name: Unpinned dependency
+    category: dependency_integrity
+    enabled: true
+    severity: high
+    condition: direct_dependency_has_no_exact_version
+    action: review
+
+  - id: SC-003
+    name: Missing dependency lockfile
+    category: reproducibility
+    enabled: true
+    severity: high
+    condition: dependency_manifest_has_no_lockfile
+    action: review
+
+  - id: SC-004
+    name: Missing artifact checksum
+    category: artifact_integrity
+    enabled: true
+    severity: high
+    condition: release_artifact_has_no_supported_hash
+    action: review
+
+  - id: SC-005
+    name: Untrusted package source
+    category: provenance
+    enabled: true
+    severity: critical
+    condition: dependency_source_is_not_approved
+    action: block
+
+  - id: SC-006
+    name: Unknown license
+    category: licensing
+    enabled: true
+    severity: medium
+    condition: dependency_license_is_unknown
+    action: review
+
+  - id: SC-007
+    name: Potential secret in manifest
+    category: secrets
+    enabled: true
+    severity: critical
+    condition: manifest_contains_credential_pattern
+    action: block
+
+  - id: SC-008
+    name: Unverified artifact provenance
+    category: provenance
+    enabled: true
+    severity: high
+    condition: artifact_provenance_is_unverified
+    action: review
+
+  - id: SC-009
+    name: Dependency from mutable VCS reference
+    category: dependency_integrity
+    enabled: true
+    severity: high
+    condition: vcs_dependency_has_no_immutable_commit
+    action: review
+
+  - id: SC-010
+    name: Expired security exception
+    category: governance
+    enabled: true
+    severity: high
+    condition: security_exception_is_expired
+    action: block
